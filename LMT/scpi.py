@@ -2,12 +2,11 @@
 
 # standard library
 import sys
-import socket
-from socket import AF_INET, SOCK_STREAM
+from socket import socket, AF_INET, SOCK_STREAM
 
 
 # classes
-class SCPI:
+class SCPI(object):
     """Create an interface to SCPI instruments.
 
     Args:
@@ -20,8 +19,7 @@ class SCPI:
         >>> FG.send('FREQ 10')
     """
     def __init__(self, host, port=8000):
-        self.host = host
-        self.s = socket.socket(AF_INET, SOCK_STREAM)
+        self.s = socket(AF_INET, SOCK_STREAM)
         self.s.connect((host, port))
         self.f = self.s.makefile('rb')
 
